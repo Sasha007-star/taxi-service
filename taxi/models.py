@@ -36,10 +36,11 @@ class Car(models.Model):
 
 
 class Driver(AbstractUser):
-    license_number = models.CharField(max_length=20, unique=True)
+    license_number = models.CharField(max_length=20, unique=True, null=True, blank=True)
 
     class Meta:
         ordering = ("username",)
 
     def __str__(self):
         return f"{self.username} ({self.license_number})"
+
