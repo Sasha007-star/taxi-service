@@ -1,4 +1,16 @@
 body {
     background-color: papayawhip;
-    color: blue;
+}
+
+.table-simple {
+  border-collapse: collapse;
+  width: auto;
+}
+
+
+.table-simple th,
+.table-simple td {
+  border: 1px solid #000;
+  padding: 8px;
+  text-align: left;
 }
