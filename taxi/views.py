@@ -20,7 +20,7 @@ def index(request):
 class ManufacturerListView(ListView):
     model = Manufacturer
     queryset = Manufacturer.objects.order_by("name")
-    paginate_by = 5
+    paginate_by = 3
 
 
 class CarListView(ListView):
