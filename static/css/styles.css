@@ -17,3 +17,21 @@ body {
 .pagination {
   margin-top: 20px;
 }
+
+td {
+  background-color: rgb(182, 246, 109);
+}
+
+th {
+  background-color: blueviolet;
+  color: aliceblue;
+}
+
+h2 {
+  color: red;
+  font-size: 40px;
+}
+
+a {
+  color:chocolate;
+}
