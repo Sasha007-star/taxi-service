@@ -1,5 +1,5 @@
 body {
-    background-color: papayawhip;
+    background-color: rgb(225, 255, 213);
 }
 
 .table-simple {
@@ -33,5 +33,34 @@ h2 {
 }
 
 a {
-  color:chocolate;
+  color:rgb(8, 45, 192);
 }
+
+.site-title {
+  display: inline-block;
+  text-align: center;
+  margin: 30px auto;
+  color: green;
+  border: 5px solid rgb(250, 142, 142);;
+  padding: 20px;
+}
+
+.main-user {
+  color: darkmagenta;
+  font-size: 25px;
+  font-weight: 900;
+}
+
+.pages-list {
+  color: darkmagenta;
+  font-size: 20px;
+}
+
+.pages-link {
+  text-decoration: none;
+  color: darkmagenta;
+  border: 4px dashed rgb(250, 142, 142);
+  padding: 10px;
+  font-weight: 700;
+}
+

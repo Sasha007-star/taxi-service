@@ -1,7 +1,13 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.urls import reverse_lazy
 from taxi.models import Driver, Manufacturer, Car
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import (CreateView, UpdateView, DeleteView)
+from django.views import generic
 
+
+@login_required
 def index(request):
     num_drivers = Driver.objects.count()
     num_manufacturers = Manufacturer.objects.count()
@@ -17,27 +23,62 @@ def index(request):
     )
 
 
-class ManufacturerListView(ListView):
+class ManufacturerListView(LoginRequiredMixin, generic.ListView):
     model = Manufacturer
-    queryset = Manufacturer.objects.order_by("name")
-    paginate_by = 3
-
-
-class CarListView(ListView):
-    model = Car
-    queryset = Car.objects.select_related("manufacturer")
+    context_object_name = "manufacturer_list"
+    template_name = "taxi/manufacturer_list.html"
     paginate_by = 5
 
 
-class CarDetailView(DetailView):
+class CarListView(LoginRequiredMixin, generic.ListView):
+    model = Car
+    paginate_by = 5
+    queryset = Car.objects.all().select_related("manufacturer")
+
+
+class CarDetailView(LoginRequiredMixin, generic.DetailView):
     model = Car
 
 
-class DriverListView(ListView):
+class DriverListView(LoginRequiredMixin, generic.ListView):
     model = Driver
     paginate_by = 5
 
 
-class DriverDetailView(DetailView):
+class DriverDetailView(LoginRequiredMixin, generic.DetailView):
     model = Driver
-    queryset = Driver.objects.prefetch_related("cars__manufacturer")
+    queryset = Driver.objects.all().prefetch_related("cars__manufacturer")
+
+
+class CarCreateView(LoginRequiredMixin, CreateView):
+    model = Car
+    fields = "__all__"
+    success_url = reverse_lazy("taxi:car-list")
+
+
+class CarUpdateView(LoginRequiredMixin, UpdateView):
+    model = Car
+    fields = "__all__"
+    success_url = reverse_lazy("taxi:car-list")
+
+
+class CarDeleteView(LoginRequiredMixin, DeleteView):
+    model = Car
+    success_url = reverse_lazy("taxi:car-list")
+
+
+class ManufacturerCreateView(LoginRequiredMixin, CreateView):
+    model = Manufacturer
+    fields = "__all__"
+    success_url = reverse_lazy("taxi:manufacturer-list")
+
+
+class ManufacturerUpdateView(LoginRequiredMixin, UpdateView):
+    model = Manufacturer
+    fields = "__all__"
+    success_url = reverse_lazy("taxi:manufacturer-list")
+
+
+class ManufacturerDeleteView(LoginRequiredMixin, DeleteView):
+    model = Manufacturer
+    success_url = reverse_lazy("taxi:manufacturer-list")

@@ -13,5 +13,7 @@
     {% for driver in car.drivers.all %}
       <p><strong>Driver username: </strong>{{ driver.username }}</p>
     {% endfor %}
+    <p><a href="{% url 'taxi:car-update' pk=car.id %}">Update car</a></p>
+    <p><a href="{% url 'taxi:car-delete' pk=car.id %}">Delete car</a></p>
   </div>
 {% endblock %}

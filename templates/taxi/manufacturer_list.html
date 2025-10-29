@@ -5,22 +5,32 @@
 
 {% block content %}
   <h2>Manufacturers</h2>
-<table class="table-simple">
-  <thead>
-    <tr>
-      <th>NAME</th>
-      <th>COUNTRY</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for manufacturer in manufacturer_list %}
-      <tr>
-        <td>{{ manufacturer.name }}</td>
-        <td>{{ manufacturer.country }}</td>
-      </tr>
-    {% empty %}
-      <tr><td colspan="2">No manufacturers found.</td></tr>
-    {% endfor %}
-  </tbody>
-</table>
+
+  {% if manufacturer_list %}
+    <table class="table-simple">
+      <thead>
+        <tr>
+          <th>NAME</th>
+          <th>COUNTRY</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for manufacturer in manufacturer_list %}
+          <tr>
+            <td>{{ manufacturer.name }}</td>
+            <td>{{ manufacturer.country }}</td>
+            <td>
+              <a href="{% url 'taxi:manufacturer-update' pk=manufacturer.id%}">Update</a>
+            </td>
+            <td>
+              <a href="{%  url 'taxi:manufacturer-delete' pk=manufacturer.id %}">Delete</a>
+            </td>
+          </tr>
+        {% endfor %}
+  {% else %}
+      <p>There are no manufacturers in the service.</p>
+  {% endif %}
+  <p><a href="{% url 'taxi:manufacturer-create' %}">Create manufacturer</a></p>
+      </tbody>
+    </table>
 {% endblock %}
