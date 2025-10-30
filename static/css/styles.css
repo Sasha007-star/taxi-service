@@ -46,7 +46,7 @@ a {
 }
 
 .main-user {
-  color: darkmagenta;
+  color: red;
   font-size: 25px;
   font-weight: 900;
 }
@@ -63,4 +63,3 @@ a {
   padding: 10px;
   font-weight: 700;
 }
-
